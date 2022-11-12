@@ -9,6 +9,11 @@ import com.alibaba.excel.read.listener.ReadListener;
  */
 public interface ExcelListener<T> extends ReadListener<T> {
 
+    /**
+     * 获取导入数据
+     *
+     * @return 导入数据
+     */
     ExcelResult<T> getExcelResult();
 
 }

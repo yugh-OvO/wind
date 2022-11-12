@@ -14,6 +14,12 @@ import java.util.List;
  */
 public interface SysDictDataMapper extends BaseMapperPlus<SysDictDataMapper, SysDictData, SysDictData> {
 
+    /**
+     * 根据条件分页查询字典数据
+     *
+     * @param dictType 字典类型
+     * @return 字典数据集合信息
+     */
     default List<SysDictData> selectDictDataByType(String dictType) {
         return selectList(
             new LambdaQueryWrapper<SysDictData>()
@@ -21,4 +27,5 @@ public interface SysDictDataMapper extends BaseMapperPlus<SysDictDataMapper, Sys
                 .eq(SysDictData::getType, dictType)
                 .orderByAsc(SysDictData::getSort));
     }
+
 }

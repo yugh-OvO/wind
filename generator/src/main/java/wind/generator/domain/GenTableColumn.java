@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import wind.common.core.domain.BaseEntity;
-import wind.common.utils.StringUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.ibatis.type.JdbcType;
+import wind.common.core.domain.BaseEntity;
+import wind.common.utils.StringUtils;
 
 import javax.validation.constraints.NotBlank;
 
@@ -204,20 +204,4 @@ public class GenTableColumn extends BaseEntity {
         return isUsableColumn(javaField);
     }
 
-    public String readConverterExp() {
-        String remarks = StringUtils.substringBetween(this.columnComment, "（", "）");
-        StringBuffer sb = new StringBuffer();
-        if (StringUtils.isNotEmpty(remarks)) {
-            for (String value : remarks.split(" ")) {
-                if (StringUtils.isNotEmpty(value)) {
-                    Object startStr = value.subSequence(0, 1);
-                    String endStr = value.substring(1);
-                    sb.append(startStr).append("=").append(endStr).append(",");
-                }
-            }
-            return sb.deleteCharAt(sb.length() - 1).toString();
-        } else {
-            return this.columnComment;
-        }
-    }
 }

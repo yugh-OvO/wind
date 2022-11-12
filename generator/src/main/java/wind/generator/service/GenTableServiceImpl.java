@@ -11,6 +11,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import wind.common.constant.Constants;
 import wind.common.constant.GenConstants;
 import wind.common.core.domain.PageQuery;
@@ -28,13 +35,6 @@ import wind.generator.mapper.GenTableMapper;
 import wind.generator.util.GenUtils;
 import wind.generator.util.VelocityInitializer;
 import wind.generator.util.VelocityUtils;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -59,6 +59,9 @@ public class GenTableServiceImpl implements IGenTableService {
     private final GenTableMapper baseMapper;
     private final GenTableColumnMapper genTableColumnMapper;
 
+    private final static String ROOT_PATH = "/";
+    private final static int SNOW_LENGTH = 6;
+
     /**
      * 获取代码生成地址
      *
@@ -68,7 +71,7 @@ public class GenTableServiceImpl implements IGenTableService {
      */
     public static String getGenPath(GenTable table, String template) {
         String genPath = table.getGenPath();
-        if (StringUtils.equals(genPath, "/")) {
+        if (StringUtils.equals(genPath, ROOT_PATH)) {
             return System.getProperty("user.dir") + File.separator + "src" + File.separator + VelocityUtils.getFileName(template, table);
         }
         return genPath + File.separator + VelocityUtils.getFileName(template, table);
@@ -221,7 +224,7 @@ public class GenTableServiceImpl implements IGenTableService {
         GenTable table = baseMapper.selectGenTableById(tableId);
         Snowflake snowflake = IdUtil.getSnowflake();
         List<Long> menuIds = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < SNOW_LENGTH; i++) {
             menuIds.add(snowflake.nextId());
         }
         table.setMenuIds(menuIds);
@@ -325,9 +328,10 @@ public class GenTableServiceImpl implements IGenTableService {
                     column.setDictType(prevColumn.getDictType());
                     column.setQueryType(prevColumn.getQueryType());
                 }
-                if (StringUtils.isNotEmpty(prevColumn.getIsRequired()) && !column.isPk()
+                boolean judge = StringUtils.isNotEmpty(prevColumn.getIsRequired()) && !column.isPk()
                     && (column.isInsert() || column.isEdit())
-                    && ((column.isUsableColumn()) || (!column.isSuperColumn()))) {
+                    && ((column.isUsableColumn()) || (!column.isSuperColumn()));
+                if (judge) {
                     // 如果是(新增/修改&非主键/非忽略及父属性)，继续保留必填/显示类型选项
                     column.setIsRequired(prevColumn.getIsRequired());
                     column.setHtmlType(prevColumn.getHtmlType());
@@ -372,7 +376,7 @@ public class GenTableServiceImpl implements IGenTableService {
         GenTable table = baseMapper.selectGenTableByName(tableName);
         Snowflake snowflake = IdUtil.getSnowflake();
         List<Long> menuIds = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < SNOW_LENGTH; i++) {
             menuIds.add(snowflake.nextId());
         }
         table.setMenuIds(menuIds);

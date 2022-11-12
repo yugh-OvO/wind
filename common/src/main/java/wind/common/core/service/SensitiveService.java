@@ -11,7 +11,9 @@ package wind.common.core.service;
 public interface SensitiveService {
 
     /**
-     * 是否脱敏
+     * 脱敏
+     *
+     * @return 脱敏后的对象
      */
     boolean isSensitive();
 

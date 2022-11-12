@@ -4,10 +4,12 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 import wind.common.annotation.Log;
 import wind.common.constant.CacheConstants;
 import wind.common.core.controller.BaseController;
-import wind.common.core.domain.R;
+import wind.common.core.domain.Res;
 import wind.common.core.domain.dto.UserOnlineDTO;
 import wind.common.core.page.TableDataInfo;
 import wind.common.enums.BusinessType;
@@ -15,8 +17,6 @@ import wind.common.utils.StreamUtils;
 import wind.common.utils.StringUtils;
 import wind.common.utils.redis.RedisUtils;
 import wind.system.domain.SysUserOnline;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,11 +80,11 @@ public class SysUserOnlineController extends BaseController {
     @SaCheckPermission("monitor:online:forceLogout")
     @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @DeleteMapping("/{tokenId}")
-    public R<Void> forceLogout(@PathVariable String tokenId) {
+    public Res<Void> forceLogout(@PathVariable String tokenId) {
         try {
             StpUtil.kickoutByTokenValue(tokenId);
         } catch (NotLoginException e) {
         }
-        return R.ok();
+        return Res.ok();
     }
 }

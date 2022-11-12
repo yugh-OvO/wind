@@ -1,9 +1,9 @@
 package wind.common.exception.base;
 
-import wind.common.utils.StringUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import wind.common.utils.StringUtils;
 
 /**
  * 基础异常

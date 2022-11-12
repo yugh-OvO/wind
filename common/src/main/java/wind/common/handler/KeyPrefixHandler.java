@@ -1,7 +1,7 @@
 package wind.common.handler;
 
-import wind.common.utils.StringUtils;
 import org.redisson.api.NameMapper;
+import wind.common.utils.StringUtils;
 
 /**
  * redis缓存key前缀处理

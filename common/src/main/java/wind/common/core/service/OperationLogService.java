@@ -1,7 +1,7 @@
 package wind.common.core.service;
 
-import wind.common.core.domain.dto.OperationLogDTO;
 import org.springframework.scheduling.annotation.Async;
+import wind.common.core.domain.dto.OperationLogDTO;
 
 /**
  * 通用 操作日志
@@ -10,6 +10,11 @@ import org.springframework.scheduling.annotation.Async;
  */
 public interface OperationLogService {
 
+    /**
+     * 新增操作日志
+     *
+     * @param operationLogDTO 操作日志
+     */
     @Async
     void recordOperation(OperationLogDTO operationLogDTO);
 }

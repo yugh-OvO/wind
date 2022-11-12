@@ -2,11 +2,11 @@ package wind.common.helper;
 
 import cn.hutool.core.convert.Convert;
 import com.baomidou.dynamic.datasource.DynamicRoutingDataSource;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import wind.common.enums.DataBaseType;
 import wind.common.exception.ServiceException;
 import wind.common.utils.spring.SpringUtils;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

@@ -1,8 +1,8 @@
 package wind.system.domain;
 
-import wind.common.utils.StringUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import wind.common.utils.StringUtils;
 
 /**
  * 缓存信息

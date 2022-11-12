@@ -26,7 +26,8 @@ public interface IGenTableService {
     /**
      * 查询业务列表
      *
-     * @param genTable 业务信息
+     * @param genTable  业务信息
+     * @param pageQuery 分页对象
      * @return 业务集合
      */
     TableDataInfo<GenTable> selectPageGenTableList(GenTable genTable, PageQuery pageQuery);
@@ -34,7 +35,8 @@ public interface IGenTableService {
     /**
      * 查询据库列表
      *
-     * @param genTable 业务信息
+     * @param genTable  业务信息
+     * @param pageQuery 分页对象
      * @return 数据库表集合
      */
     TableDataInfo<GenTable> selectPageDbTableList(GenTable genTable, PageQuery pageQuery);

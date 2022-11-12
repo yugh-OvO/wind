@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import wind.common.constant.UserConstants;
 import wind.common.core.domain.OptionEntity;
 import wind.common.core.domain.PageQuery;
@@ -17,9 +20,6 @@ import wind.system.mapper.SysRoleMapper;
 import wind.system.mapper.SysRoleMenuMapper;
 import wind.system.mapper.SysUserRoleMapper;
 import wind.system.service.ISysRoleService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,13 +71,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public Set<String> selectRolePermissionByUserId(Integer userId) {
-//        List<SysRole> perms = baseMapper.selectRolePermissionByUserId(userId);
         Set<String> permsSet = new HashSet<>();
-//        for (SysRole perm : perms) {
-//            if (ObjectUtil.isNotNull(perm)) {
-//                permsSet.addAll(Arrays.asList(perm.getRoleKey().trim().split(",")));
-//            }
-//        }
         return permsSet;
     }
 

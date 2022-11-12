@@ -1,8 +1,6 @@
 package wind.common.config.properties;
 
 import cn.hutool.core.util.ReUtil;
-import wind.common.annotation.Anonymous;
-import wind.common.utils.spring.SpringUtils;
 import lombok.Getter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Lazy;
@@ -12,6 +10,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.util.pattern.PathPattern;
+import wind.common.annotation.Anonymous;
+import wind.common.utils.spring.SpringUtils;
 
 import java.util.*;
 import java.util.regex.Pattern;

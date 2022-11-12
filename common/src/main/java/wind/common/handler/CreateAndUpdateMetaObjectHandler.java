@@ -3,13 +3,13 @@ package wind.common.handler;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpStatus;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.reflection.MetaObject;
 import wind.common.core.domain.BaseEntity;
 import wind.common.core.domain.model.LoginUser;
 import wind.common.exception.ServiceException;
 import wind.common.helper.LoginHelper;
 import wind.common.utils.StringUtils;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.reflection.MetaObject;
 
 import java.util.Date;
 

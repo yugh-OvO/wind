@@ -13,6 +13,13 @@ import java.util.List;
  */
 public interface ISysOperationLogService {
 
+    /**
+     * 查询操作日志列表
+     *
+     * @param operationLog 操作日志信息
+     * @param pageQuery    分页对象
+     * @return 操作日志集合
+     */
     TableDataInfo<SysOperationLog> selectPageOperationLogList(SysOperationLog operationLog, PageQuery pageQuery);
 
     /**

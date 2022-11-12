@@ -21,6 +21,8 @@ import java.math.BigDecimal;
 @Slf4j
 public class ExcelBigNumberConvert implements Converter<Long> {
 
+    private final static int MAX_LENGTH = 15;
+
     @Override
     public Class<Long> supportJavaTypeKey() {
         return Long.class;
@@ -40,7 +42,7 @@ public class ExcelBigNumberConvert implements Converter<Long> {
     public WriteCellData<Object> convertToExcelData(Long object, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) {
         if (ObjectUtil.isNotNull(object)) {
             String str = Convert.toStr(object);
-            if (str.length() > 15) {
+            if (str.length() > MAX_LENGTH) {
                 return new WriteCellData<>(str);
             }
         }

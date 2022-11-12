@@ -1,6 +1,6 @@
 package wind.common.core.controller;
 
-import wind.common.core.domain.R;
+import wind.common.core.domain.Res;
 import wind.common.core.domain.model.LoginUser;
 import wind.common.helper.LoginHelper;
 import wind.common.utils.StringUtils;
@@ -18,8 +18,8 @@ public class BaseController {
      * @param rows 影响行数
      * @return 操作结果
      */
-    protected R<Void> toAjax(int rows) {
-        return rows > 0 ? R.ok() : R.fail();
+    protected Res<Void> toAjax(int rows) {
+        return rows > 0 ? Res.ok() : Res.fail();
     }
 
     /**
@@ -28,8 +28,8 @@ public class BaseController {
      * @param result 结果
      * @return 操作结果
      */
-    protected R<Void> toAjax(boolean result) {
-        return result ? R.ok() : R.fail();
+    protected Res<Void> toAjax(boolean result) {
+        return result ? Res.ok() : Res.fail();
     }
 
     /**

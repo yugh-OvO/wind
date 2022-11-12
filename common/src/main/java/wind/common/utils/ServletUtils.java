@@ -3,13 +3,13 @@ package wind.common.utils;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.HttpStatus;
-import wind.common.constant.Constants;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import wind.common.constant.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +27,10 @@ import java.nio.charset.StandardCharsets;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServletUtils extends ServletUtil {
+
+    private final static String XML_HTTP_REQUEST = "XMLHttpRequest";
+    private final static String JSON_TAIL = ".json";
+    private final static String XML_TAIL = ".xml";
 
     /**
      * 获取String参数
@@ -126,12 +130,12 @@ public class ServletUtils extends ServletUtil {
         }
 
         String xRequestedWith = request.getHeader("X-Requested-With");
-        if (xRequestedWith != null && xRequestedWith.contains("XMLHttpRequest")) {
+        if (xRequestedWith != null && xRequestedWith.contains(XML_HTTP_REQUEST)) {
             return true;
         }
 
         String uri = request.getRequestURI();
-        if (StringUtils.equalsAnyIgnoreCase(uri, ".json", ".xml")) {
+        if (StringUtils.equalsAnyIgnoreCase(uri, JSON_TAIL, XML_TAIL)) {
             return true;
         }
 

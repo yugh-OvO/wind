@@ -1,9 +1,9 @@
 package wind.system.service;
 
-import wind.system.domain.SysRole;
-import wind.system.domain.SysUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import wind.system.domain.SysRole;
+import wind.system.domain.SysUser;
 
 import java.util.HashSet;
 import java.util.List;

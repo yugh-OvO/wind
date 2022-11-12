@@ -1,8 +1,8 @@
 package wind.common.utils;
 
-import wind.common.utils.spring.SpringUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import wind.common.utils.spring.SpringUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;

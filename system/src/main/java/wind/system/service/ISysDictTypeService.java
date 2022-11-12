@@ -14,7 +14,13 @@ import java.util.List;
  */
 public interface ISysDictTypeService {
 
-
+    /**
+     * 查询字典数据
+     *
+     * @param dictType  字典数据信息
+     * @param pageQuery 分页对象
+     * @return
+     */
     TableDataInfo<SysDictType> selectPageDictTypeList(SysDictType dictType, PageQuery pageQuery);
 
     /**

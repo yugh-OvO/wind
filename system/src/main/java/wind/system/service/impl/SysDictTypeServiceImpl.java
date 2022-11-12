@@ -5,6 +5,11 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import wind.common.constant.CacheNames;
 import wind.common.constant.UserConstants;
 import wind.common.core.domain.PageQuery;
@@ -19,11 +24,6 @@ import wind.common.utils.redis.CacheUtils;
 import wind.system.mapper.SysDictDataMapper;
 import wind.system.mapper.SysDictTypeMapper;
 import wind.system.service.ISysDictTypeService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 

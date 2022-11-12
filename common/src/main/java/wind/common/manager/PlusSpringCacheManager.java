@@ -15,7 +15,6 @@
  */
 package wind.common.manager;
 
-import wind.common.utils.redis.RedisUtils;
 import org.redisson.api.RMap;
 import org.redisson.api.RMapCache;
 import org.redisson.spring.cache.CacheConfig;
@@ -25,6 +24,7 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.transaction.TransactionAwareCacheDecorator;
 import org.springframework.util.StringUtils;
+import wind.common.utils.redis.RedisUtils;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -49,6 +49,9 @@ public class PlusSpringCacheManager implements CacheManager {
     private boolean dynamic = true;
     private boolean allowNullValues = true;
     private boolean transactionAware = true;
+    private final static int TWO = 2;
+    private final static int THREE = 3;
+
 
     /**
      * Creates CacheManager supplied by Redisson instance
@@ -115,11 +118,11 @@ public class PlusSpringCacheManager implements CacheManager {
         if (array.length > 1) {
             config.setTTL(DurationStyle.detectAndParse(array[1]).toMillis());
         }
-        if (array.length > 2) {
-            config.setMaxIdleTime(DurationStyle.detectAndParse(array[2]).toMillis());
+        if (array.length > TWO) {
+            config.setMaxIdleTime(DurationStyle.detectAndParse(array[TWO]).toMillis());
         }
-        if (array.length > 3) {
-            config.setMaxSize(Integer.parseInt(array[3]));
+        if (array.length > THREE) {
+            config.setMaxSize(Integer.parseInt(array[THREE]));
         }
 
         if (config.getMaxIdleTime() == 0 && config.getTTL() == 0 && config.getMaxSize() == 0) {

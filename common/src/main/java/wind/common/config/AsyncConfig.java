@@ -1,13 +1,13 @@
 package wind.common.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import wind.common.exception.ServiceException;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
+import wind.common.exception.ServiceException;
 
 import java.util.Arrays;
 import java.util.concurrent.Executor;

@@ -5,6 +5,9 @@ import cn.dev33.satoken.listener.SaTokenListener;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import wind.common.constant.CacheConstants;
 import wind.common.core.domain.dto.UserOnlineDTO;
 import wind.common.core.domain.model.LoginUser;
@@ -12,9 +15,6 @@ import wind.common.helper.LoginHelper;
 import wind.common.utils.ServletUtils;
 import wind.common.utils.ip.AddressUtils;
 import wind.common.utils.redis.RedisUtils;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 

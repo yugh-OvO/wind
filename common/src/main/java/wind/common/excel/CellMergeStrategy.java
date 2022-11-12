@@ -1,8 +1,8 @@
 package wind.common.excel;
 
+import cn.hutool.core.map.MapUtil;
 import com.alibaba.excel.metadata.Head;
 import com.alibaba.excel.write.merge.AbstractMergeStrategy;
-import wind.common.annotation.CellMerge;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.SneakyThrows;
@@ -11,11 +11,11 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
+import wind.common.annotation.CellMerge;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +52,7 @@ public class CellMergeStrategy extends AbstractMergeStrategy {
         }
         // 行合并开始下标
         int rowIndex = hasTitle ? 1 : 0;
-        Map<Field, RepeatCell> map = new HashMap<>();
+        Map<Field, RepeatCell> map = MapUtil.newHashMap();
         // 生成两两合并单元格
         for (int i = 0; i < list.size(); i++) {
             for (int j = 0; j < mergeFields.size(); j++) {

@@ -1,9 +1,9 @@
 package wind.common.utils.sql;
 
-import wind.common.exception.UtilException;
-import wind.common.utils.StringUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import wind.common.exception.UtilException;
+import wind.common.utils.StringUtils;
 
 /**
  * sql操作工具类

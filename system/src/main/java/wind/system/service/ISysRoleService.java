@@ -16,6 +16,13 @@ import java.util.Set;
 public interface ISysRoleService {
 
 
+    /**
+     * 根据条件分页查询角色数据
+     *
+     * @param role      角色信息
+     * @param pageQuery 分页对象
+     * @return 角色数据集合信息
+     */
     TableDataInfo<SysRole> selectPageRoleList(SysRole role, PageQuery pageQuery);
 
     /**
@@ -104,6 +111,11 @@ public interface ISysRoleService {
      */
     int deleteRoleByIds(Integer[] roleIds);
 
+    /**
+     * 查询角色选项
+     *
+     * @return 角色选项数据
+     */
     List<OptionEntity> getOptions();
 
 }

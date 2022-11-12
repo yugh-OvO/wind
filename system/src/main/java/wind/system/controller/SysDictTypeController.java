@@ -1,19 +1,19 @@
 package wind.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import wind.common.annotation.Log;
 import wind.common.constant.UserConstants;
 import wind.common.core.controller.BaseController;
 import wind.common.core.domain.PageQuery;
-import wind.common.core.domain.R;
+import wind.common.core.domain.Res;
 import wind.common.core.domain.entity.SysDictType;
 import wind.common.core.page.TableDataInfo;
 import wind.common.enums.BusinessType;
 import wind.common.utils.poi.ExcelUtil;
 import wind.system.service.ISysDictTypeService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -58,8 +58,8 @@ public class SysDictTypeController extends BaseController {
      */
     @SaCheckPermission("system:dict:query")
     @GetMapping(value = "/{dictId}")
-    public R<SysDictType> getInfo(@PathVariable Long dictId) {
-        return R.ok(dictTypeService.selectDictTypeById(dictId));
+    public Res<SysDictType> getInfo(@PathVariable Long dictId) {
+        return Res.ok(dictTypeService.selectDictTypeById(dictId));
     }
 
     /**
@@ -68,12 +68,12 @@ public class SysDictTypeController extends BaseController {
     @SaCheckPermission("system:dict:add")
     @Log(title = "字典类型", businessType = BusinessType.INSERT)
     @PostMapping
-    public R<Void> add(@Validated @RequestBody SysDictType dict) {
+    public Res<Void> add(@Validated @RequestBody SysDictType dict) {
         if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
-            return R.fail("新增字典'" + dict.getName() + "'失败，字典类型已存在");
+            return Res.fail("新增字典'" + dict.getName() + "'失败，字典类型已存在");
         }
         dictTypeService.insertDictType(dict);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -82,12 +82,12 @@ public class SysDictTypeController extends BaseController {
     @SaCheckPermission("system:dict:edit")
     @Log(title = "字典类型", businessType = BusinessType.UPDATE)
     @PutMapping
-    public R<Void> edit(@Validated @RequestBody SysDictType dict) {
+    public Res<Void> edit(@Validated @RequestBody SysDictType dict) {
         if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
-            return R.fail("修改字典'" + dict.getName() + "'失败，字典类型已存在");
+            return Res.fail("修改字典'" + dict.getName() + "'失败，字典类型已存在");
         }
         dictTypeService.updateDictType(dict);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -98,9 +98,9 @@ public class SysDictTypeController extends BaseController {
     @SaCheckPermission("system:dict:remove")
     @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @DeleteMapping("/{dictIds}")
-    public R<Void> remove(@PathVariable Long[] dictIds) {
+    public Res<Void> remove(@PathVariable Long[] dictIds) {
         dictTypeService.deleteDictTypeByIds(dictIds);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -109,17 +109,17 @@ public class SysDictTypeController extends BaseController {
     @SaCheckPermission("system:dict:remove")
     @Log(title = "字典类型", businessType = BusinessType.CLEAN)
     @DeleteMapping("/refreshCache")
-    public R<Void> refreshCache() {
+    public Res<Void> refreshCache() {
         dictTypeService.resetDictCache();
-        return R.ok();
+        return Res.ok();
     }
 
     /**
      * 获取字典选择框列表
      */
     @GetMapping("/optionselect")
-    public R<List<SysDictType>> optionselect() {
+    public Res<List<SysDictType>> optionselect() {
         List<SysDictType> dictTypes = dictTypeService.selectDictTypeAll();
-        return R.ok(dictTypes);
+        return Res.ok(dictTypes);
     }
 }

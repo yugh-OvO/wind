@@ -1,8 +1,8 @@
 package wind.common.core.domain.model;
 
-import wind.common.constant.UserConstants;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import wind.common.constant.UserConstants;
 
 import javax.validation.constraints.NotBlank;
 

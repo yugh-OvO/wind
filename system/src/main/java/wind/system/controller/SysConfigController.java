@@ -1,19 +1,19 @@
 package wind.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import wind.common.annotation.Log;
 import wind.common.constant.UserConstants;
 import wind.common.core.controller.BaseController;
 import wind.common.core.domain.PageQuery;
-import wind.common.core.domain.R;
+import wind.common.core.domain.Res;
 import wind.common.core.page.TableDataInfo;
 import wind.common.enums.BusinessType;
 import wind.common.utils.poi.ExcelUtil;
 import wind.system.domain.SysConfig;
 import wind.system.service.ISysConfigService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -58,8 +58,8 @@ public class SysConfigController extends BaseController {
      */
     @SaCheckPermission("system:config:query")
     @GetMapping(value = "/{configId}")
-    public R<SysConfig> getInfo(@PathVariable Long configId) {
-        return R.ok(configService.selectConfigById(configId));
+    public Res<SysConfig> getInfo(@PathVariable Long configId) {
+        return Res.ok(configService.selectConfigById(configId));
     }
 
     /**
@@ -68,9 +68,9 @@ public class SysConfigController extends BaseController {
      * @param code 参数Key
      */
     @GetMapping(value = "/code/{code}")
-    public R<Void> getCode(@PathVariable String code) {
+    public Res<Void> getCode(@PathVariable String code) {
         System.out.println("code = " + code);
-        return R.ok(configService.selectConfigByCode(code));
+        return Res.ok(configService.selectConfigByCode(code));
     }
 
     /**
@@ -79,12 +79,12 @@ public class SysConfigController extends BaseController {
     @SaCheckPermission("system:config:add")
     @Log(title = "参数管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public R<Void> add(@Validated @RequestBody SysConfig config) {
+    public Res<Void> add(@Validated @RequestBody SysConfig config) {
         if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigCodeUnique(config))) {
-            return R.fail("新增参数'" + config.getName() + "'失败，参数键名已存在");
+            return Res.fail("新增参数'" + config.getName() + "'失败，参数键名已存在");
         }
         configService.insertConfig(config);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -93,12 +93,12 @@ public class SysConfigController extends BaseController {
     @SaCheckPermission("system:config:edit")
     @Log(title = "参数管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public R<Void> edit(@Validated @RequestBody SysConfig config) {
+    public Res<Void> edit(@Validated @RequestBody SysConfig config) {
         if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigCodeUnique(config))) {
-            return R.fail("修改参数'" + config.getName() + "'失败，参数键名已存在");
+            return Res.fail("修改参数'" + config.getName() + "'失败，参数键名已存在");
         }
         configService.updateConfig(config);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -107,9 +107,9 @@ public class SysConfigController extends BaseController {
     @SaCheckPermission("system:config:edit")
     @Log(title = "参数管理", businessType = BusinessType.UPDATE)
     @PutMapping("/updateByKey")
-    public R<Void> updateByKey(@RequestBody SysConfig config) {
+    public Res<Void> updateByKey(@RequestBody SysConfig config) {
         configService.updateConfig(config);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -120,9 +120,9 @@ public class SysConfigController extends BaseController {
     @SaCheckPermission("system:config:remove")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{configIds}")
-    public R<Void> remove(@PathVariable Long[] configIds) {
+    public Res<Void> remove(@PathVariable Long[] configIds) {
         configService.deleteConfigByIds(configIds);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -131,8 +131,8 @@ public class SysConfigController extends BaseController {
     @SaCheckPermission("system:config:remove")
     @Log(title = "参数管理", businessType = BusinessType.CLEAN)
     @DeleteMapping("/refreshCache")
-    public R<Void> refreshCache() {
+    public Res<Void> refreshCache() {
         configService.resetConfigCache();
-        return R.ok();
+        return Res.ok();
     }
 }

@@ -2,8 +2,8 @@ package wind.common.satoken.dao;
 
 import cn.dev33.satoken.dao.SaTokenDao;
 import cn.dev33.satoken.util.SaFoxUtil;
-import wind.common.utils.redis.RedisUtils;
 import org.springframework.stereotype.Component;
+import wind.common.utils.redis.RedisUtils;
 
 import java.time.Duration;
 import java.util.ArrayList;

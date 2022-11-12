@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import wind.common.constant.GenConstants;
-import wind.common.core.domain.BaseEntity;
-import wind.common.utils.StringUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.ArrayUtils;
+import wind.common.constant.GenConstants;
+import wind.common.core.domain.BaseEntity;
+import wind.common.utils.StringUtils;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;

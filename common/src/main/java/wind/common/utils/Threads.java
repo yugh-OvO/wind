@@ -15,6 +15,8 @@ import java.util.concurrent.*;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Threads {
 
+    private final static int AWAIT_TIMEOUT = 120;
+
     /**
      * sleep等待,单位为毫秒
      */
@@ -37,9 +39,9 @@ public class Threads {
         if (pool != null && !pool.isShutdown()) {
             pool.shutdown();
             try {
-                if (!pool.awaitTermination(120, TimeUnit.SECONDS)) {
+                if (!pool.awaitTermination(AWAIT_TIMEOUT, TimeUnit.SECONDS)) {
                     pool.shutdownNow();
-                    if (!pool.awaitTermination(120, TimeUnit.SECONDS)) {
+                    if (!pool.awaitTermination(AWAIT_TIMEOUT, TimeUnit.SECONDS)) {
                         log.info("Pool did not terminate");
                     }
                 }

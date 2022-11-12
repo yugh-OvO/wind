@@ -1,10 +1,10 @@
 package wind.common.manager;
 
-import wind.common.utils.Threads;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import wind.common.utils.Threads;
 
 import javax.annotation.PreDestroy;
 import java.util.concurrent.ScheduledExecutorService;

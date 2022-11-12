@@ -1,9 +1,9 @@
 package wind.common.satoken.service;
 
 import cn.dev33.satoken.stp.StpInterface;
+import org.springframework.stereotype.Component;
 import wind.common.core.domain.model.LoginUser;
 import wind.common.helper.LoginHelper;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;

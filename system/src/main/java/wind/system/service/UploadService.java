@@ -14,6 +14,11 @@ import wind.common.utils.StringUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * 文件上传 服务层
+ *
+ * @author Yu Gaoheng
+ */
 @RequiredArgsConstructor
 @Service
 public class UploadService {

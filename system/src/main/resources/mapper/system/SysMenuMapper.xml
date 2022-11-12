@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wind.system.mapper.SysMenuMapper">
 
     <resultMap type="SysMenu" id="SysMenuResult">
@@ -88,7 +88,7 @@
         from sys_menu m
                  left join sys_role_menu rm on m.id = rm.menu_id
                  left join sys_user_role sur on rm.role_id = sur.role_id
-                 left join sys_role r on r.id = sur.role_id
+                 left join sys_role res on res.id = sur.role_id
         where sur.user_id = #{userId}
     </select>
 

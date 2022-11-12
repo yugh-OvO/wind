@@ -3,12 +3,12 @@ package wind.common.core.domain.entity;
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import wind.common.annotation.ExcelDictFormat;
 import wind.common.constant.UserConstants;
 import wind.common.convert.ExcelDictConvert;
 import wind.common.core.domain.BaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

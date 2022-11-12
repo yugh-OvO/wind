@@ -3,6 +3,11 @@ package wind.system.response;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * 上传文件响应
+ *
+ * @author Yu Gaoheng
+ */
 @Data
 @Builder
 public class UploadRes {

@@ -1,13 +1,13 @@
 package wind.generator.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.RegExUtils;
 import wind.common.constant.GenConstants;
 import wind.common.utils.StringUtils;
 import wind.generator.config.GenConfig;
 import wind.generator.domain.GenTable;
 import wind.generator.domain.GenTableColumn;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.RegExUtils;
 
 import java.util.Arrays;
 
@@ -18,6 +18,16 @@ import java.util.Arrays;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GenUtils {
+
+    private final static int DECIMAL_LENGTH = 2;
+    private final static int INTEGER_MAX_LENGTH = 10;
+    private final static String NAME_COLUMN = "name";
+    private final static String STATUS_COLUMN = "status";
+    private final static String TYPE_COLUMN = "type";
+    private final static String IMAGE_COLUMN = "image";
+    private final static String FILE_COLUMN = "file";
+    private final static String CONTENT_COLUMN = "content";
+    private final static Character LEFT_BRACKET = '(';
 
     /**
      * 初始化表信息
@@ -59,11 +69,11 @@ public class GenUtils {
 
             // 如果是浮点型 统一用BigDecimal
             String[] str = StringUtils.split(StringUtils.substringBetween(column.getColumnType(), "(", ")"), ",");
-            if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0) {
+            if (str != null && str.length == DECIMAL_LENGTH && Integer.parseInt(str[1]) > 0) {
                 column.setJavaType(GenConstants.TYPE_BIGDECIMAL);
             }
             // 如果是整形
-            else if (str != null && str.length == 1 && Integer.parseInt(str[0]) <= 10) {
+            else if (str != null && str.length == 1 && Integer.parseInt(str[0]) <= INTEGER_MAX_LENGTH) {
                 column.setJavaType(GenConstants.TYPE_INTEGER);
             }
             // 长整形
@@ -94,28 +104,28 @@ public class GenUtils {
         }
 
         // 查询字段类型
-        if (StringUtils.endsWithIgnoreCase(columnName, "name")) {
+        if (StringUtils.endsWithIgnoreCase(columnName, NAME_COLUMN)) {
             column.setQueryType(GenConstants.QUERY_LIKE);
         }
         // 状态字段设置单选框
-        if (StringUtils.endsWithIgnoreCase(columnName, "status")) {
+        if (StringUtils.endsWithIgnoreCase(columnName, STATUS_COLUMN)) {
             column.setHtmlType(GenConstants.HTML_RADIO);
         }
         // 类型&性别字段设置下拉框
-        else if (StringUtils.endsWithIgnoreCase(columnName, "type")
+        else if (StringUtils.endsWithIgnoreCase(columnName, TYPE_COLUMN)
             || StringUtils.endsWithIgnoreCase(columnName, "sex")) {
             column.setHtmlType(GenConstants.HTML_SELECT);
         }
         // 图片字段设置图片上传控件
-        else if (StringUtils.endsWithIgnoreCase(columnName, "image")) {
+        else if (StringUtils.endsWithIgnoreCase(columnName, IMAGE_COLUMN)) {
             column.setHtmlType(GenConstants.HTML_IMAGE_UPLOAD);
         }
         // 文件字段设置文件上传控件
-        else if (StringUtils.endsWithIgnoreCase(columnName, "file")) {
+        else if (StringUtils.endsWithIgnoreCase(columnName, FILE_COLUMN)) {
             column.setHtmlType(GenConstants.HTML_FILE_UPLOAD);
         }
         // 内容字段设置富文本控件
-        else if (StringUtils.endsWithIgnoreCase(columnName, "content")) {
+        else if (StringUtils.endsWithIgnoreCase(columnName, CONTENT_COLUMN)) {
             column.setHtmlType(GenConstants.HTML_EDITOR);
         }
     }
@@ -208,7 +218,7 @@ public class GenUtils {
      * @return 截取后的列类型
      */
     public static String getDbType(String columnType) {
-        if (StringUtils.indexOf(columnType, '(') > 0) {
+        if (StringUtils.indexOf(columnType, LEFT_BRACKET) > 0) {
             return StringUtils.substringBefore(columnType, "(");
         } else {
             return columnType;
@@ -222,7 +232,7 @@ public class GenUtils {
      * @return 截取后的列类型
      */
     public static Integer getColumnLength(String columnType) {
-        if (StringUtils.indexOf(columnType, '(') > 0) {
+        if (StringUtils.indexOf(columnType, LEFT_BRACKET) > 0) {
             String length = StringUtils.substringBetween(columnType, "(", ")");
             return Integer.valueOf(length);
         } else {

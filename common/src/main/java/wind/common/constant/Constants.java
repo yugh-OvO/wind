@@ -67,5 +67,10 @@ public interface Constants {
      */
     String TOKEN = "token";
 
+    /**
+     * 时间范围数组长度
+     */
+    int TIME_RANGE_LENGTH = 2;
+
 }
 

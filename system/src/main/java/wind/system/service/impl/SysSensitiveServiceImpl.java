@@ -1,8 +1,8 @@
 package wind.system.service.impl;
 
+import org.springframework.stereotype.Service;
 import wind.common.core.service.SensitiveService;
 import wind.common.helper.LoginHelper;
-import org.springframework.stereotype.Service;
 
 /**
  * 脱敏服务

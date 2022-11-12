@@ -6,15 +6,15 @@ import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpLogic;
 import cn.dev33.satoken.stp.StpUtil;
-import wind.common.config.properties.ExcludeUrlProperties;
-import wind.common.config.properties.SecurityProperties;
-import wind.common.utils.spring.SpringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import wind.common.config.properties.ExcludeUrlProperties;
+import wind.common.config.properties.SecurityProperties;
+import wind.common.utils.spring.SpringUtils;
 
 /**
  * sa-token 配置

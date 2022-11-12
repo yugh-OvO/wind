@@ -236,7 +236,7 @@ public class StreamUtils {
         Set<K> key = new HashSet<>();
         key.addAll(map1.keySet());
         key.addAll(map2.keySet());
-        Map<K, V> map = new HashMap<>();
+        Map<K, V> map = MapUtil.newHashMap();
         for (K t : key) {
             X x = map1.get(t);
             Y y = map2.get(t);

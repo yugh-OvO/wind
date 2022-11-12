@@ -5,15 +5,15 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.apache.velocity.VelocityContext;
 import wind.common.constant.GenConstants;
 import wind.common.helper.DataBaseHelper;
 import wind.common.utils.JsonUtils;
 import wind.common.utils.StringUtils;
 import wind.generator.domain.GenTable;
 import wind.generator.domain.GenTableColumn;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.apache.velocity.VelocityContext;
 
 import java.util.*;
 
@@ -24,6 +24,20 @@ import java.util.*;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class VelocityUtils {
+
+    private final static String DOMAIN = "domain.java.vm";
+    private final static String MAPPER = "mapper.java.vm";
+    private final static String SERVICE = "service.java.vm";
+    private final static String SERVICE_IMPL = "serviceImpl.java.vm";
+    private final static String CONTROLLER = "controller.java.vm";
+    private final static String MAPPER_XML = "mapper.xml.vm";
+    private final static String API = "api.js.vm";
+    private final static String SQL = "sql.vm";
+    private final static String VO = "vo.java.vm";
+    private final static String BO = "bo.java.vm";
+    private final static String SUB_DOMAIN = "sub-domain.java.vm";
+    private final static String INDEX_VUE = "index.vue.vm";
+    private final static String INDEX_TREE_VUE = "index-tree.vue.vm";
 
     /**
      * 项目空间路径
@@ -179,34 +193,34 @@ public class VelocityUtils {
         String mybatisPath = MYBATIS_PATH + "/" + moduleName;
         String vuePath = "vue";
 
-        if (template.contains("domain.java.vm")) {
+        if (template.contains(DOMAIN)) {
             fileName = StringUtils.format("{}/domain/{}.java", javaPath, className);
         }
-        if (template.contains("vo.java.vm")) {
+        if (template.contains(VO)) {
             fileName = StringUtils.format("{}/domain/vo/{}Vo.java", javaPath, className);
         }
-        if (template.contains("bo.java.vm")) {
+        if (template.contains(BO)) {
             fileName = StringUtils.format("{}/domain/bo/{}Bo.java", javaPath, className);
         }
-        if (template.contains("sub-domain.java.vm") && StringUtils.equals(GenConstants.TPL_SUB, genTable.getTplCategory())) {
+        if (template.contains(SUB_DOMAIN) && StringUtils.equals(GenConstants.TPL_SUB, genTable.getTplCategory())) {
             fileName = StringUtils.format("{}/domain/{}.java", javaPath, genTable.getSubTable().getClassName());
-        } else if (template.contains("mapper.java.vm")) {
+        } else if (template.contains(MAPPER)) {
             fileName = StringUtils.format("{}/mapper/{}Mapper.java", javaPath, className);
-        } else if (template.contains("service.java.vm")) {
+        } else if (template.contains(SERVICE)) {
             fileName = StringUtils.format("{}/service/I{}Service.java", javaPath, className);
-        } else if (template.contains("serviceImpl.java.vm")) {
+        } else if (template.contains(SERVICE_IMPL)) {
             fileName = StringUtils.format("{}/service/impl/{}ServiceImpl.java", javaPath, className);
-        } else if (template.contains("controller.java.vm")) {
+        } else if (template.contains(CONTROLLER)) {
             fileName = StringUtils.format("{}/controller/{}Controller.java", javaPath, className);
-        } else if (template.contains("mapper.xml.vm")) {
+        } else if (template.contains(MAPPER_XML)) {
             fileName = StringUtils.format("{}/{}Mapper.xml", mybatisPath, className);
-        } else if (template.contains("sql.vm")) {
+        } else if (template.contains(SQL)) {
             fileName = businessName + "Menu.sql";
-        } else if (template.contains("api.js.vm")) {
+        } else if (template.contains(API)) {
             fileName = StringUtils.format("{}/api/{}/{}.js", vuePath, moduleName, businessName);
-        } else if (template.contains("index.vue.vm")) {
+        } else if (template.contains(INDEX_VUE)) {
             fileName = StringUtils.format("{}/views/{}/{}/index.vue", vuePath, moduleName, businessName);
-        } else if (template.contains("index-tree.vue.vm")) {
+        } else if (template.contains(INDEX_TREE_VUE)) {
             fileName = StringUtils.format("{}/views/{}/{}/index.vue", vuePath, moduleName, businessName);
         }
         return fileName;

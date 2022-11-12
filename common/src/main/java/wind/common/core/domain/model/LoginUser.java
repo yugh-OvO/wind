@@ -1,9 +1,9 @@
 package wind.common.core.domain.model;
 
-import wind.common.core.domain.dto.RoleDTO;
-import wind.common.helper.LoginHelper;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import wind.common.core.domain.dto.RoleDTO;
+import wind.common.helper.LoginHelper;
 
 import java.io.Serializable;
 import java.util.List;

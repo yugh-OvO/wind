@@ -2,19 +2,19 @@ package wind.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.hutool.core.util.ObjectUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import wind.common.annotation.Log;
 import wind.common.core.controller.BaseController;
 import wind.common.core.domain.PageQuery;
-import wind.common.core.domain.R;
+import wind.common.core.domain.Res;
 import wind.common.core.domain.entity.SysDictData;
 import wind.common.core.page.TableDataInfo;
 import wind.common.enums.BusinessType;
 import wind.common.utils.poi.ExcelUtil;
 import wind.system.service.ISysDictDataService;
 import wind.system.service.ISysDictTypeService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -61,8 +61,8 @@ public class SysDictDataController extends BaseController {
      */
     @SaCheckPermission("system:dict:query")
     @GetMapping(value = "/{dictCode}")
-    public R<SysDictData> getInfo(@PathVariable Long dictCode) {
-        return R.ok(dictDataService.selectDictDataById(dictCode));
+    public Res<SysDictData> getInfo(@PathVariable Long dictCode) {
+        return Res.ok(dictDataService.selectDictDataById(dictCode));
     }
 
     /**
@@ -71,12 +71,12 @@ public class SysDictDataController extends BaseController {
      * @param dictType 字典类型
      */
     @GetMapping(value = "/type/{dictType}")
-    public R<List<SysDictData>> dictType(@PathVariable String dictType) {
+    public Res<List<SysDictData>> dictType(@PathVariable String dictType) {
         List<SysDictData> data = dictTypeService.selectDictDataByType(dictType);
         if (ObjectUtil.isNull(data)) {
             data = new ArrayList<>();
         }
-        return R.ok(data);
+        return Res.ok(data);
     }
 
     /**
@@ -85,9 +85,9 @@ public class SysDictDataController extends BaseController {
     @SaCheckPermission("system:dict:add")
     @Log(title = "字典数据", businessType = BusinessType.INSERT)
     @PostMapping
-    public R<Void> add(@Validated @RequestBody SysDictData dict) {
+    public Res<Void> add(@Validated @RequestBody SysDictData dict) {
         dictDataService.insertDictData(dict);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -96,9 +96,9 @@ public class SysDictDataController extends BaseController {
     @SaCheckPermission("system:dict:edit")
     @Log(title = "字典数据", businessType = BusinessType.UPDATE)
     @PutMapping
-    public R<Void> edit(@Validated @RequestBody SysDictData dict) {
+    public Res<Void> edit(@Validated @RequestBody SysDictData dict) {
         dictDataService.updateDictData(dict);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -109,8 +109,8 @@ public class SysDictDataController extends BaseController {
     @SaCheckPermission("system:dict:remove")
     @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @DeleteMapping("/{dictCodes}")
-    public R<Void> remove(@PathVariable Long[] dictCodes) {
+    public Res<Void> remove(@PathVariable Long[] dictCodes) {
         dictDataService.deleteDictDataByIds(dictCodes);
-        return R.ok();
+        return Res.ok();
     }
 }

@@ -7,12 +7,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
 import wind.common.annotation.Sensitive;
 import wind.common.core.service.SensitiveService;
 import wind.common.enums.SensitiveStrategy;
 import wind.common.utils.spring.SpringUtils;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
 
 import java.io.IOException;
 import java.util.Objects;

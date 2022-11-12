@@ -1,8 +1,8 @@
 package wind.common.enums;
 
-import wind.common.utils.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import wind.common.utils.StringUtils;
 
 /**
  * 数据库类型

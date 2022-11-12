@@ -3,6 +3,9 @@ package wind.system.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.stereotype.Service;
 import wind.common.constant.CacheNames;
 import wind.common.core.domain.PageQuery;
 import wind.common.core.domain.entity.SysDictData;
@@ -12,9 +15,6 @@ import wind.common.utils.StringUtils;
 import wind.common.utils.redis.CacheUtils;
 import wind.system.mapper.SysDictDataMapper;
 import wind.system.service.ISysDictDataService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

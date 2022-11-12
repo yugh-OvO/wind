@@ -3,9 +3,9 @@ package wind.common.core.domain;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.Data;
 import wind.common.utils.StringUtils;
 import wind.common.utils.sql.SqlUtil;
-import lombok.Data;
 
 import java.io.Serializable;
 
@@ -17,6 +17,12 @@ import java.io.Serializable;
 
 @Data
 public class PageQuery implements Serializable {
+
+    public final static String ASC = "asc";
+    public final static String DESC = "desc";
+    public final static String ASCENDING = "ascending";
+    public final static String DESCENDING = "descending";
+
 
     /**
      * 当前记录起始索引 默认值
@@ -60,17 +66,17 @@ public class PageQuery implements Serializable {
 
     private OrderItem buildOrderItem() {
         // 兼容前端排序类型
-        if ("ascending".equals(isAsc)) {
-            isAsc = "asc";
-        } else if ("descending".equals(isAsc)) {
-            isAsc = "desc";
+        if (ASCENDING.equals(isAsc)) {
+            isAsc = ASC;
+        } else if (DESCENDING.equals(isAsc)) {
+            isAsc = DESC;
         }
         if (StringUtils.isNotBlank(orderByColumn)) {
             String orderBy = SqlUtil.escapeOrderBySql(orderByColumn);
             orderBy = StringUtils.toUnderScoreCase(orderBy);
-            if ("asc".equals(isAsc)) {
+            if (ASC.equals(isAsc)) {
                 return OrderItem.asc(orderBy);
-            } else if ("desc".equals(isAsc)) {
+            } else if (DESC.equals(isAsc)) {
                 return OrderItem.desc(orderBy);
             }
         }

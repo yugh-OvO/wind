@@ -1,7 +1,7 @@
 package wind.common.filter;
 
-import wind.common.utils.StringUtils;
 import org.springframework.http.MediaType;
+import wind.common.utils.StringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

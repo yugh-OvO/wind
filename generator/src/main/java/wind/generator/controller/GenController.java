@@ -3,13 +3,14 @@ package wind.generator.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.map.MapUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import wind.common.annotation.Log;
 import wind.common.core.controller.BaseController;
 import wind.common.core.domain.PageQuery;
-import wind.common.core.domain.R;
+import wind.common.core.domain.Res;
 import wind.common.core.page.TableDataInfo;
 import wind.common.enums.BusinessType;
 import wind.generator.domain.GenTable;
@@ -18,7 +19,6 @@ import wind.generator.service.IGenTableService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,15 +51,15 @@ public class GenController extends BaseController {
      */
     @SaCheckPermission("tool:gen:query")
     @GetMapping(value = "/{tableId}")
-    public R<Map<String, Object>> getInfo(@PathVariable Long tableId) {
+    public Res<Map<String, Object>> getInfo(@PathVariable Long tableId) {
         GenTable table = genTableService.selectGenTableById(tableId);
         List<GenTable> tables = genTableService.selectGenTableAll();
         List<GenTableColumn> list = genTableService.selectGenTableColumnListByTableId(tableId);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("info" , table);
-        map.put("rows" , list);
-        map.put("tables" , tables);
-        return R.ok(map);
+        Map<String, Object> map = MapUtil.newHashMap();
+        map.put("info", table);
+        map.put("rows", list);
+        map.put("tables", tables);
+        return Res.ok(map);
     }
 
     /**
@@ -92,26 +92,26 @@ public class GenController extends BaseController {
      * @param tables 表名串
      */
     @SaCheckPermission("tool:gen:import")
-    @Log(title = "代码生成" , businessType = BusinessType.IMPORT)
+    @Log(title = "代码生成", businessType = BusinessType.IMPORT)
     @PostMapping("/importTable")
-    public R<Void> importTableSave(String tables) {
+    public Res<Void> importTableSave(String tables) {
         String[] tableNames = Convert.toStrArray(tables);
         // 查询表信息
         List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames);
         genTableService.importGenTable(tableList);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
      * 修改保存代码生成业务
      */
     @SaCheckPermission("tool:gen:edit")
-    @Log(title = "代码生成" , businessType = BusinessType.UPDATE)
+    @Log(title = "代码生成", businessType = BusinessType.UPDATE)
     @PutMapping
-    public R<Void> editSave(@Validated @RequestBody GenTable genTable) {
+    public Res<Void> editSave(@Validated @RequestBody GenTable genTable) {
         genTableService.validateEdit(genTable);
         genTableService.updateGenTable(genTable);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -120,11 +120,11 @@ public class GenController extends BaseController {
      * @param tableIds 表ID串
      */
     @SaCheckPermission("tool:gen:remove")
-    @Log(title = "代码生成" , businessType = BusinessType.DELETE)
+    @Log(title = "代码生成", businessType = BusinessType.DELETE)
     @DeleteMapping("/{tableIds}")
-    public R<Void> remove(@PathVariable Long[] tableIds) {
+    public Res<Void> remove(@PathVariable Long[] tableIds) {
         genTableService.deleteGenTableByIds(tableIds);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -134,9 +134,9 @@ public class GenController extends BaseController {
      */
     @SaCheckPermission("tool:gen:preview")
     @GetMapping("/preview/{tableId}")
-    public R<Map<String, String>> preview(@PathVariable("tableId") Long tableId) throws IOException {
+    public Res<Map<String, String>> preview(@PathVariable("tableId") Long tableId) throws IOException {
         Map<String, String> dataMap = genTableService.previewCode(tableId);
-        return R.ok(dataMap);
+        return Res.ok(dataMap);
     }
 
     /**
@@ -145,7 +145,7 @@ public class GenController extends BaseController {
      * @param tableName 表名
      */
     @SaCheckPermission("tool:gen:code")
-    @Log(title = "代码生成" , businessType = BusinessType.GENCODE)
+    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/download/{tableName}")
     public void download(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
         byte[] data = genTableService.downloadCode(tableName);
@@ -158,11 +158,11 @@ public class GenController extends BaseController {
      * @param tableName 表名
      */
     @SaCheckPermission("tool:gen:code")
-    @Log(title = "代码生成" , businessType = BusinessType.GENCODE)
+    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/genCode/{tableName}")
-    public R<Void> genCode(@PathVariable("tableName") String tableName) {
+    public Res<Void> genCode(@PathVariable("tableName") String tableName) {
         genTableService.generatorCode(tableName);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -171,11 +171,11 @@ public class GenController extends BaseController {
      * @param tableName 表名
      */
     @SaCheckPermission("tool:gen:edit")
-    @Log(title = "代码生成" , businessType = BusinessType.UPDATE)
+    @Log(title = "代码生成", businessType = BusinessType.UPDATE)
     @GetMapping("/synchDb/{tableName}")
-    public R<Void> synchDb(@PathVariable("tableName") String tableName) {
+    public Res<Void> synchDb(@PathVariable("tableName") String tableName) {
         genTableService.synchDb(tableName);
-        return R.ok();
+        return Res.ok();
     }
 
     /**
@@ -184,7 +184,7 @@ public class GenController extends BaseController {
      * @param tables 表名串
      */
     @SaCheckPermission("tool:gen:code")
-    @Log(title = "代码生成" , businessType = BusinessType.GENCODE)
+    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
         String[] tableNames = Convert.toStrArray(tables);
@@ -197,10 +197,10 @@ public class GenController extends BaseController {
      */
     private void genCode(HttpServletResponse response, byte[] data) throws IOException {
         response.reset();
-        response.addHeader("Access-Control-Allow-Origin" , "*");
-        response.addHeader("Access-Control-Expose-Headers" , "Content-Disposition");
-        response.setHeader("Content-Disposition" , "attachment; filename=\"wind.zip\"");
-        response.addHeader("Content-Length" , "" + data.length);
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
+        response.setHeader("Content-Disposition", "attachment; filename=\"wind.zip\"");
+        response.addHeader("Content-Length", "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
         IoUtil.write(response.getOutputStream(), false, data);
     }

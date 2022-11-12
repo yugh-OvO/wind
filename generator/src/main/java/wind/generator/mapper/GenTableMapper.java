@@ -2,9 +2,9 @@ package wind.generator.mapper;
 
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
 import wind.common.core.mapper.BaseMapperPlus;
 import wind.generator.domain.GenTable;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ public interface GenTableMapper extends BaseMapperPlus<GenTableMapper, GenTable,
      * 查询据库列表
      *
      * @param genTable 查询条件
+     * @param page     分页对象
      * @return 数据库表集合
      */
     Page<GenTable> selectPageDbTableList(@Param("page") Page<GenTable> page, @Param("genTable") GenTable genTable);

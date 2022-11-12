@@ -43,19 +43,19 @@ public class AddressUtils {
         if (WindConfig.isAddressEnabled()) {
             try {
                 String rspStr = HttpUtil.createGet(IP_URL)
-                    .body("ip=" + ip + "&json=true" , Constants.GBK)
+                    .body("ip=" + ip + "&json=true", Constants.GBK)
                     .execute()
                     .body();
                 if (StringUtils.isEmpty(rspStr)) {
-                    log.error("获取地理位置异常 {}" , ip);
+                    log.error("获取地理位置异常 {}", ip);
                     return UNKNOWN;
                 }
                 Dict obj = JsonUtils.parseMap(rspStr);
                 String region = obj.getStr("pro");
                 String city = obj.getStr("city");
-                return String.format("%s %s" , region, city);
+                return String.format("%s %s", region, city);
             } catch (Exception e) {
-                log.error("获取地理位置异常 {}" , ip);
+                log.error("获取地理位置异常 {}", ip);
             }
         }
         return UNKNOWN;

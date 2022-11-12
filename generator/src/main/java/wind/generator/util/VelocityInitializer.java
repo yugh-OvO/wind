@@ -1,9 +1,9 @@
 package wind.generator.util;
 
-import wind.common.constant.Constants;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.velocity.app.Velocity;
+import wind.common.constant.Constants;
 
 import java.util.Properties;
 

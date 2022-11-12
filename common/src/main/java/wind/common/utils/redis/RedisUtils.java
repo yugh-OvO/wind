@@ -1,10 +1,10 @@
 package wind.common.utils.redis;
 
-import wind.common.utils.spring.SpringUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.redisson.api.*;
 import org.redisson.config.Config;
+import wind.common.utils.spring.SpringUtils;
 
 import java.time.Duration;
 import java.util.Collection;

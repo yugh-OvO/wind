@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import wind.common.core.domain.TreeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import wind.common.core.domain.TreeEntity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

@@ -1,11 +1,11 @@
 package wind.common.utils.redis;
 
-import wind.common.utils.spring.SpringUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.redisson.api.RMap;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import wind.common.utils.spring.SpringUtils;
 
 import java.util.Set;
 

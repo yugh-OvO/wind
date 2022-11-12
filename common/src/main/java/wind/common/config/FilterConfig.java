@@ -1,17 +1,17 @@
 package wind.common.config;
 
-import wind.common.config.properties.XssProperties;
-import wind.common.filter.RepeatableFilter;
-import wind.common.filter.XssFilter;
-import wind.common.utils.StringUtils;
+import cn.hutool.core.map.MapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import wind.common.config.properties.XssProperties;
+import wind.common.filter.RepeatableFilter;
+import wind.common.filter.XssFilter;
+import wind.common.utils.StringUtils;
 
 import javax.servlet.DispatcherType;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -35,7 +35,7 @@ public class FilterConfig {
         registration.addUrlPatterns(StringUtils.split(xssProperties.getUrlPatterns(), ","));
         registration.setName("xssFilter");
         registration.setOrder(FilterRegistrationBean.HIGHEST_PRECEDENCE);
-        Map<String, String> initParameters = new HashMap<String, String>();
+        Map<String, String> initParameters = MapUtil.newHashMap();
         initParameters.put("excludes", xssProperties.getExcludes());
         registration.setInitParameters(initParameters);
         return registration;
