@@ -757,7 +757,7 @@ CREATE TABLE `sys_user`
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_user`
-VALUES (1, 'admin', '管理员', '18661139072@163.com', '18661139072', '',
+VALUES (1, 'admin', '管理员', '11111111111@163.com', '11111111111', '',
         '$2a$10$ftww/gSkGrKghrIzZFFI8exy/RGOWItzbDdfVI8WybEuyRLXZSy7K', 1, '0:0:0:0:0:0:0:1', '2022-11-09 09:48:33',
         'admin', '2022-09-18 15:06:06', 'admin', '2022-11-09 09:48:33', '管理员');
 COMMIT;
@@ -842,21 +842,5 @@ CREATE TABLE `win_log`
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6
   DEFAULT CHARSET = utf8mb4 COMMENT ='中奖记录';
-
--- ----------------------------
--- Records of win_log
--- ----------------------------
-BEGIN;
-INSERT INTO `win_log`
-VALUES (1, 14, 1, '阿萨德', '2022-11-04 16:47:30', 2, '2022-11-07 11:04:25', '于高衡', '18661139072', '新北区典雅花园');
-INSERT INTO `win_log`
-VALUES (2, 14, 1, '阿萨德', '2022-11-08 09:06:31', 2, '2022-11-08 11:05:46', '于高衡', '18661139072', '新北区典雅花园');
-INSERT INTO `win_log`
-VALUES (3, 14, 1, '阿萨德', '2022-11-09 10:05:00', 3, NULL, NULL, NULL, NULL);
-INSERT INTO `win_log`
-VALUES (4, 14, 1, '阿萨德', '2022-11-09 10:05:24', 3, NULL, NULL, NULL, NULL);
-INSERT INTO `win_log`
-VALUES (5, 14, 1, '阿萨德', '2022-11-09 10:05:36', 1, NULL, NULL, NULL, NULL);
-COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
