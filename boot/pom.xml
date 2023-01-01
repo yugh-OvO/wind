@@ -50,18 +50,6 @@
             <artifactId>system</artifactId>
         </dependency>
 
-        <!-- 代码生成-->
-        <dependency>
-            <groupId>wind</groupId>
-            <artifactId>generator</artifactId>
-        </dependency>
-
-        <!-- 业务功能-->
-        <dependency>
-            <groupId>wind</groupId>
-            <artifactId>business</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>

@@ -218,15 +218,26 @@
             </dependency>
 
             <dependency>
-                <groupId>wind</groupId>
-                <artifactId>common</artifactId>
-                <version>${wind.version}</version>
+                <groupId>cn.easy-es</groupId>
+                <artifactId>easy-es-boot-starter</artifactId>
+                <version>1.1.0</version>
             </dependency>
 
-            <!-- 代码生成-->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>7.14.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>7.14.0</version>
+            </dependency>
+
             <dependency>
                 <groupId>wind</groupId>
-                <artifactId>generator</artifactId>
+                <artifactId>common</artifactId>
                 <version>${wind.version}</version>
             </dependency>
 
@@ -237,13 +248,6 @@
                 <version>${wind.version}</version>
             </dependency>
 
-            <!-- 业务模块-->
-            <dependency>
-                <groupId>wind</groupId>
-                <artifactId>business</artifactId>
-                <version>${wind.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -251,8 +255,6 @@
         <module>boot</module>
         <module>common</module>
         <module>system</module>
-        <module>business</module>
-        <module>generator</module>
     </modules>
     <packaging>pom</packaging>
 
